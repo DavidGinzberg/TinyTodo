@@ -45,27 +45,34 @@ function add() {
     return false;
 }
 
+function getByType(type){
+  if(type === "todo") return get_todos();
+  return get_complete();
+}
+
 //removes it from todos list
 function remove() {
     //get and store id of item
     var id = this.getAttribute('id');
+    var type = this.getAttribute('data-type');
+    var todos = getByType(type);
     // call get_todos function
-    var todos = get_todos();
+    // var todos = get_todos();
     //remove item(id as reference) from todos array
     todos.splice(id, 1);
 
     // set todo localStorage item to new array(todos)
-    localStorage.setItem('todo', JSON.stringify(todos));
+    localStorage.setItem(type, JSON.stringify(todos));
     // call show function to show updated todos list
     show();
 
     return false;
 }
 
-function buildList(todos){
+function buildList(todos, type){
   var html = '<ul>';
   for(var i=0; i<todos.length; i++) {
-      html += '<li>' + todos[i] + '<button class="remove" id="' + i  + '">x</button><button class="complete" id="'+i+'">+</button></li>';
+      html += '<li>' + todos[i] + '<button class="remove" id="' + i  + '" data-type="' + type +'">x</button><button class="complete" id="'+i+'" data-type="' + type +'">+</button></li>';
   };
   html += '</ul>';
   return html;
@@ -75,9 +82,9 @@ function show() {
     var todos = get_todos();
     var completetodos = get_complete();
 
-    document.getElementById('todos').innerHTML = buildList(todos);
+    document.getElementById('todos').innerHTML = buildList(todos, "todo");
 
-    document.getElementById('completed').innerHTML = buildList(completetodos);
+    document.getElementById('completed').innerHTML = buildList(completetodos, "complete");
 
     var buttons = document.getElementsByClassName('remove');
     for (var i=0; i < buttons.length; i++) {

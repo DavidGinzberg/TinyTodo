@@ -62,17 +62,22 @@ function remove() {
     return false;
 }
 
+function buildList(todos){
+  var html = '<ul>';
+  for(var i=0; i<todos.length; i++) {
+      html += '<li>' + todos[i] + '<button class="remove" id="' + i  + '">x</button><button class="complete" id="'+i+'">+</button></li>';
+  };
+  html += '</ul>';
+  return html;
+}
+
 function show() {
     var todos = get_todos();
     var completetodos = get_complete();
 
-    var html = '<ul>';
-    for(var i=0; i<todos.length; i++) {
-        html += '<li>' + todos[i] + '<button class="remove" id="' + i  + '">x</button><button class="complete" id="'+i+'">+</button></li>';
-    };
-    html += '</ul>';
+    document.getElementById('todos').innerHTML = buildList(todos);
 
-    document.getElementById('todos').innerHTML = html;
+    document.getElementById('completed').innerHTML = buildList(completetodos);
 
     var buttons = document.getElementsByClassName('remove');
     for (var i=0; i < buttons.length; i++) {

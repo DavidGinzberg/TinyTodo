@@ -15,6 +15,20 @@ function get_todos() {
     return todos;
 }
 
+function get_complete() {
+    //create new array to hold todo items(returned array)
+    var completetodos = new Array;
+    //array to initially hold items from localStorage
+    var completetodos_str = localStorage.getItem('complete');
+    //if todos_str array not empty transfer items from todos_str array to todos array
+    if (completetodos_str !== null) {
+        completetodos = JSON.parse(completetodos_str);
+    }
+    console.log("Complete: ", completetodos_str);
+    //return todos array
+    return completetodos;
+}
+
 //adds todo item to localStorage todo list
 function add() {
     //grabs reference to element and stores value of element to task variable
@@ -50,6 +64,7 @@ function remove() {
 
 function show() {
     var todos = get_todos();
+    var completetodos = get_complete();
 
     var html = '<ul>';
     for(var i=0; i<todos.length; i++) {
@@ -76,8 +91,9 @@ function complete() {
     var id = this.getAttribute('id');
     // call get_todos function
     var todos = get_todos();
+    var completetodos = get_complete();
     //remove item(id as reference) from todos array
-    completetodos.push(id);
+    completetodos.push(todos[id]);
     todos.splice(id, 1);
     localStorage.setItem('todo', JSON.stringify(todos));
     // set todo localStorage item to new array(todos)

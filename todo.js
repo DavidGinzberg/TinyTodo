@@ -53,7 +53,7 @@ function show() {
 
     var html = '<ul>';
     for(var i=0; i<todos.length; i++) {
-        html += '<li>' + todos[i] + '<button class="remove" id="' + i  + '">x</button><button class"complete" id="'+i+'">+</button></li>';
+        html += '<li>' + todos[i] + '<button class="remove" id="' + i  + '">x</button><button class="complete" id="'+i+'">+</button></li>';
     };
     html += '</ul>';
 

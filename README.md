@@ -1,4 +1,4 @@
-#TinyToDo
+# TinyToDo
 
 A small ToDo Applicaiton built in vanilla JavaScript for a workshop at [Philly Tech Week 2017](http://2017.phillytechweek.com/events/dev_workshops)
 
